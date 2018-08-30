@@ -24,7 +24,6 @@ class App extends React.Component {
       url: "/repos",
       success: function(topRepos) {
         setData(topRepos);
-        console.log('this is the data', data);
         console.log('this is the repos', that.state.repos);
       },
       failure: function() {
