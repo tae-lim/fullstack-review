@@ -10,13 +10,44 @@ class App extends React.Component {
     this.state = {
       repos: []
     }
+  }
 
+  componentDidMount() {
+    let that = this;
+    function setData(response) {
+      that.setState({
+        repos: response
+      });
+    }
+    $.ajax({
+      type: "GET",
+      url: "/repos",
+      success: function(topRepos) {
+        setData(topRepos);
+        console.log('this is the data', data);
+        console.log('this is the repos', that.state.repos);
+      },
+      failure: function() {
+        console.log('It didnt work!');
+      }
+    })
   }
 
   search (term) {
-    console.log(`${term} was searched`);
+    //console.log(`${term} was searched`);
     // TODO
-    //send the search string to server using jQuery ajax method to send a POST request to repos.
+      //send the search string to server using jQuery ajax method to send a POST request to repos.
+    $.ajax({
+      type: "POST",
+      url: "http://localhost:1128/repos",
+      data: {term: term},
+      success: function(data) {
+        console.log('It worked!');
+      },
+      failure: function() {
+        console.log('It didnt work!');
+      }
+    });
   }
 
   render () {
