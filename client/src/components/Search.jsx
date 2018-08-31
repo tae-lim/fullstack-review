@@ -26,7 +26,7 @@ class Search extends React.Component {
         value={this.state.terms}
         onChange={this.onChange.bind(this)}
       />
-      <button onClick={this.search.bind(this)}> Add Repos </button>
+      <button onClick={this.search.bind(this)}>Add Repos</button>
     </div>)
   }
 }

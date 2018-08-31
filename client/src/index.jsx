@@ -10,26 +10,33 @@ class App extends React.Component {
     this.state = {
       repos: []
     }
+    this.setData = this.setData.bind(this);
+    this.fetch = this.fetch.bind(this);
   }
 
-  componentDidMount() {
-    let that = this;
-    function setData(response) {
-      that.setState({
-        repos: response
-      });
-    }
+  setData (data) {
+    this.setState({
+      repos: data
+    })
+  }
+
+  fetch() {
     $.ajax({
       type: "GET",
       url: "/repos",
-      success: function(topRepos) {
-        setData(topRepos);
-        console.log('this is the repos', that.state.repos);
+      context: this,
+      success: (topRepos) => {
+        this.setData(topRepos);
+        console.log(this.state.repos);
       },
-      failure: function() {
+      failure: () => {
         console.log('It didnt work!');
       }
     })
+  }
+
+  componentDidMount() {
+    this.fetch();
   }
 
   search (term) {
@@ -38,16 +45,31 @@ class App extends React.Component {
       //send the search string to server using jQuery ajax method to send a POST request to repos.
     $.ajax({
       type: "POST",
-      url: "http://localhost:1128/repos",
+      url: "/repos",
       data: {term: term},
-      success: function(data) {
-        console.log('It worked!');
-      },
-      failure: function() {
-        console.log('It didnt work!');
-      }
-    });
+    })
+    .done(function(res) {
+       window.location.reload();
+    })
   }
+
+  //   search (term) {
+  //   //console.log(`${term} was searched`);
+  //   // TODO
+  //     //send the search string to server using jQuery ajax method to send a POST request to repos.
+  //   $.ajax({
+  //     type: "POST",
+  //     url: "/repos",
+  //     data: {term: term},
+  //     success: (data) => {
+  //       this.fetch();
+  //       console.log(this);
+  //       console.log('It worked!');
+  //     }
+
+  //   });
+
+  // }
 
   render () {
     return (<div>

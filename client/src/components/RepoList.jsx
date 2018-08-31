@@ -1,7 +1,6 @@
 import React from 'react';
 
 const RepoList = (props) => {
-console.log(props);
 return (
   <div>
     <h4> Repo List Component </h4>
@@ -24,8 +23,8 @@ return (
             <td>{repo.description}</td>
             <td>{repo.url}</td>
             <td>{repo.watchers}</td>
-            <td>{repo.created_at}</td>
-            <td>{repo.updated_at}</td>
+            <td>{repo.created_at.slice(0, 10)}</td>
+            <td>{repo.updated_at.slice(0, 10)}</td>
           </tr>
           )
         })}

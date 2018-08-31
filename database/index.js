@@ -79,18 +79,5 @@ let query = (callback) => {
   });
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 module.exports.save = save;
 module.exports.query = query;
